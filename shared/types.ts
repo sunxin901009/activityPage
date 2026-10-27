@@ -15,6 +15,7 @@ export interface Profile {
   school: string
   interest: string
   hero: string | null
+  nature_photo: string | null
   email: string | null
 }
 

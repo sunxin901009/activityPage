@@ -231,10 +231,18 @@ html[data-theme="sunset-grove"] .theme-option-check { color: #a8541f; }
 .nature-copy h2 { margin: 9px 0 0; color: #294638; font-family: Georgia, 'Songti SC', serif; font-size: clamp(30px, 3vw, 42px); letter-spacing: -1.5px; }
 .nature-copy h2 em { color: #6f8b65; font-weight: 400; }
 .nature-copy p { max-width: 300px; margin: 0 0 4px; color: #788173; font-size: 12px; line-height: 1.8; }
-.nature-landscape { position: relative; height: clamp(220px, 27vw, 365px); overflow: hidden; border: 1px solid #dfe4d4; border-radius: 8px; background: #e8efe0; box-shadow: 0 16px 38px #2b443414; }
-.nature-landscape svg { width: 100%; height: 100%; }
-.landscape-label { position: absolute; right: 19px; bottom: 16px; padding: 8px 11px; border: 1px solid #ffffff99; border-radius: 20px; background: #f7f7efcf; color: #49634d; font-size: 8px; font-weight: 700; letter-spacing: 1.5px; backdrop-filter: blur(8px); }
-.nature-caption { display: flex; align-items: center; justify-content: center; gap: 18px; padding-top: 20px; color: #7c8874; font-family: Georgia, 'STKaiti', 'KaiTi', serif; font-size: 14px; font-style: italic; text-align: center; }
+.nature-photo { position: relative; margin: 0; height: clamp(300px, 38vw, 480px); overflow: hidden; border: 10px solid #fffef8; border-radius: 200px 200px 10px 10px; background: #dfe8d2; box-shadow: 0 20px 42px #2b44341c; transform: rotate(-.7deg); transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s; }
+.nature-photo:hover { transform: rotate(0deg) translateY(-4px); box-shadow: 0 28px 52px #2b443426; }
+.nature-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.nature-photo:hover img { transform: scale(1.035); }
+.nature-photo-empty { display: grid; place-items: center; height: 100%; color: #a9bfa0; }
+.nature-photo-empty svg { width: 90px; height: 90px; }
+.nature-tape { position: absolute; z-index: 2; top: -12px; width: 96px; height: 26px; background: #e4a2858c; box-shadow: 0 2px 6px #2b44341a; }
+.nature-tape-l { left: 12%; transform: rotate(-14deg); }
+.nature-tape-r { right: 12%; transform: rotate(12deg); }
+.nature-figcaption { position: absolute; left: 20px; right: 20px; bottom: 16px; z-index: 1; display: flex; justify-content: space-between; gap: 12px; color: #fffef6; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-shadow: 0 1px 8px #20301fb3; }
+.nature-figcaption::before { content: ''; position: absolute; z-index: -1; inset: -70px -20px -16px; background: linear-gradient(transparent, #20301f4d); pointer-events: none; }
+.nature-caption { display: flex; align-items: center; justify-content: center; gap: 14px; padding-top: 24px; color: #7c8874; font-family: Georgia, 'STKaiti', 'KaiTi', serif; font-size: 15px; font-style: italic; text-align: center; }
 .nature-caption-mark { color: #d48762; font-family: Georgia, serif; font-size: 22px; font-style: normal; }
 
 @media (max-width: 600px) {
@@ -244,7 +252,9 @@ html[data-theme="sunset-grove"] .theme-option-check { color: #a8541f; }
   .nature-copy { align-items: flex-start; flex-direction: column; gap: 7px; margin-bottom: 18px; }
   .nature-copy h2 { font-size: 30px; }
   .nature-copy p { max-width: 100%; }
-  .nature-landscape { height: 220px; border-radius: 6px; }
+  .nature-photo { height: 250px; border-width: 7px; border-radius: 130px 130px 8px 8px; }
+  .nature-tape { width: 64px; height: 20px; }
+  .nature-figcaption { font-size: 7px; letter-spacing: 1.4px; }
   .nature-caption { gap: 8px; font-size: 12px; }
 }
 @media (min-width: 601px) and (max-width: 1100px) {

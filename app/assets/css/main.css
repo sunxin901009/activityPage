@@ -44,7 +44,8 @@ button:focus-visible, a:focus-visible, select:focus-visible { outline: 3px solid
 .hero-footnote { display: flex; gap: 24px; margin-top: 36px; color: #8c8d80; font-size: 8px; letter-spacing: 1.5px; }
 .hero-art { position: relative; width: 100%; max-width: 470px; margin: 10px auto; padding: 14px 16px 14px 30px; }
 .hero-art::before { content: ''; position: absolute; width: 87%; height: 91%; top: 25px; left: 38px; border: 1px solid #bbc4ad; border-radius: 43% 43% 8px 8px; transform: rotate(6deg); }
-.hero-photo { height: 452px; position: relative; overflow: hidden; border-radius: 43% 43% 7px 7px; transform: rotate(-3deg); background: #38553e; box-shadow: 0 14px 35px #2d402517; }
+.hero-photo { height: 452px; position: relative; overflow: hidden; border-radius: 43% 43% 7px 7px; transform: rotate(-3deg); background: #38553e; box-shadow: 0 14px 35px #2d402517; transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s; }
+.hero-art:hover .hero-photo { transform: rotate(-1.6deg) translateY(-5px); box-shadow: 0 22px 44px #2d402523; }
 .hero-photo::after { content: ''; position: absolute; inset: 50% 0 0; background: linear-gradient(transparent, #182f2599); }
 .hero-photo img { height: 100%; width: 100%; object-fit: cover; }
 .photo-caption { position: absolute; bottom: 22px; left: 24px; z-index: 1; color: #fff; font-size: 9px; letter-spacing: 2px; }

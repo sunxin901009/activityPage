@@ -16,6 +16,7 @@ export const profile: Profile = {
   school: 'Beijing 21st Century School',
   interest: 'Environmental Science',
   hero: '/images/forest.jpg',
+  nature_photo: '/images/_forest.jpg',
   email: null,
 }
 

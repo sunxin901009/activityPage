@@ -50,7 +50,7 @@ export async function getPortfolio(config: ContentConfig): Promise<Portfolio> {
     activities: demoActivities.map(({ body, outcome, reflection, media, ...activity }) => activity),
   }
   const [profile, categories, activities] = await Promise.all([
-    cmsRead<Profile>(config, 'items/profile', { fields: 'name,tagline,introduction,school,interest,hero,email' }),
+    cmsRead<Profile>(config, 'items/profile', { fields: 'name,tagline,introduction,school,interest,hero,nature_photo,email' }),
     cmsRead<Category[]>(config, 'items/categories', { fields: '*', sort: 'sort', limit: '-1' }),
     cmsRead<Activity[]>(config, 'items/activities', { fields: activityFields, 'filter[status][_eq]': 'published', sort: 'sort,-date', limit: '-1' }),
   ])

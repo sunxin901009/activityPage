@@ -18,7 +18,7 @@ useSeoMeta({ title: () => `${data.value?.profile.name} · A Journey of Curiosity
       </div>
       <div class="hero-art">
         <div class="orbit-label">A WORK IN PROGRESS — JUST LIKE ME</div>
-        <div class="hero-photo"><img v-if="data.profile.hero" :src="assetUrl(data.profile.hero, 1200)!" alt="A natural landscape, seen through curious eyes" fetchpriority="high" width="900" height="1100"><div v-else class="hero-no-photo"><Sparkle /></div><span class="photo-caption">FIELD NOTES / LIFE & LEARNING</span></div>
+        <div class="hero-photo"><img v-if="data.profile.hero" :src="assetUrl(data.profile.hero, 1200)!" :alt="`A portrait of ${data.profile.name}`" fetchpriority="high" width="900" height="1100"><div v-else class="hero-no-photo"><Sparkle /></div><span class="photo-caption">THIS IS ME / LIFE & LEARNING</span></div>
         <div class="hero-collage" aria-hidden="true">
           <span class="hc-petal">✿</span>
           <span class="hc-quote">collecting sunlight,<br><em>one story at a time.</em></span>
