@@ -1,0 +1,31 @@
+{
+  "name": "tairan-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev --host 127.0.0.1",
+    "dev:demo": "node scripts/demo.mjs dev",
+    "build": "nuxt build",
+    "preview": "nuxt preview",
+    "typecheck": "nuxt typecheck",
+    "test": "vitest run",
+    "cms:setup": "node --env-file=.env scripts/setup-directus.mjs",
+    "cms:verify": "node --env-file=.env scripts/verify-directus.mjs",
+    "cms:english": "node --env-file=.env scripts/migrate-english.mjs"
+  },
+  "engines": { "node": ">=22.22.3" },
+  "dependencies": {
+    "nuxt": "4.6.2",
+    "vue": "3.5.44",
+    "vue-router": "5.4.0",
+    "sanitize-html": "2.18.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "tailwindcss": "4.3.3",
+    "@types/sanitize-html": "2.16.2",
+    "typescript": "5.9.3",
+    "vue-tsc": "3.3.13",
+    "vitest": "4.1.0"
+  }
+}

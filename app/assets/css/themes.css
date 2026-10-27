@@ -1,0 +1,286 @@
+/* The right-edge switcher stays visible while each theme changes the full page. */
+.theme-switcher { position: fixed; z-index: 60; top: 50%; right: 0; transform: translateY(-50%); display: flex; align-items: center; gap: 10px; color: #253d32; }
+.theme-switcher-trigger { display: flex; align-items: center; gap: 8px; padding: 12px 13px 12px 11px; border: 1px solid #d9ddcf; border-right: 0; border-radius: 14px 0 0 14px; background: #fffdf4; box-shadow: 0 6px 24px #1d302216; color: inherit; font-size: 11px; font-weight: 700; letter-spacing: .08em; writing-mode: vertical-rl; }
+.theme-trigger-spark { color: #df7955; font-size: 17px; line-height: 1; }
+.theme-panel { position: absolute; right: 54px; top: 50%; width: 250px; padding: 17px; transform: translateY(-50%); border: 1px solid #e1dfd1; border-radius: 13px; background: #fffdf7; box-shadow: 0 18px 50px #17241924; writing-mode: horizontal-tb; }
+.theme-panel-heading { display: grid; gap: 5px; padding: 1px 3px 13px; border-bottom: 1px solid #e9e6db; }
+.theme-panel-kicker { color: #8b907f; font-size: 8px; font-weight: 700; letter-spacing: .18em; }
+.theme-panel-heading strong { font-family: Georgia, serif; font-size: 18px; font-weight: 500; }
+.theme-options { display: grid; gap: 5px; padding-top: 8px; }
+.theme-option { display: grid; grid-template-columns: 38px 1fr 18px; align-items: center; gap: 10px; width: 100%; padding: 10px 8px; border: 1px solid transparent; border-radius: 8px; background: transparent; text-align: left; color: inherit; }
+.theme-option:hover, .theme-option.selected { border-color: #dedfcf; background: #f7f6ed; }
+.theme-swatches { display: flex; align-items: center; }
+.theme-swatches i { width: 15px; height: 22px; border: 1px solid #15231d1c; border-radius: 5px; }
+.theme-swatches i + i { margin-left: -5px; }
+.theme-option-copy { display: grid; gap: 3px; }
+.theme-option-copy strong { font-size: 11px; }
+.theme-option-copy small { color: #858a7c; font-size: 9px; }
+.theme-option-check { color: #315a3f; font-size: 14px; font-weight: 700; }
+
+/* Give the opening portrait more room and balance it against the introduction. */
+.hero { width: calc(100% - 128px); max-width: 1460px; grid-template-columns: minmax(0, 1.08fr) minmax(390px, .92fr); gap: clamp(48px, 7vw, 112px); min-height: min(700px, calc(100svh - 94px)); padding-block: clamp(52px, 6.5vw, 88px); }
+.hero-copy { max-width: 560px; margin-left: clamp(0px, 1.5vw, 24px); }
+.hero h1 { font-size: clamp(62px, 5.3vw, 86px); line-height: 1.04; letter-spacing: -3.4px; margin-block: 22px 21px; }
+.hero-tagline { font-size: clamp(20px, 1.55vw, 25px); }
+.hero-intro { max-width: 500px; font-size: 15px; line-height: 1.95; }
+.hero-art { max-width: 520px; padding-inline: 30px 20px; isolation: isolate; }
+.hero-photo { height: clamp(420px, 32vw, 500px); }
+.hero-art::after { content: ''; position: absolute; z-index: -1; width: 110%; height: 92%; top: 4%; left: -5%; border-radius: 50%; background: radial-gradient(ellipse, #e9edda 0%, #eef0e600 68%); pointer-events: none; }
+
+/* Meadow Breeze — meadow sky overhead, grass underfoot, citrus sticker pops. */
+html[data-theme="meadow-breeze"] { background: #eef6df; color: #265034; --green: #3a8f4a; --muted: #5f7a64; --line: #cfe0b6; }
+html[data-theme="meadow-breeze"] body { background: #eef6df; }
+html[data-theme="meadow-breeze"] ::selection { background: #ffd97d; color: #265034; }
+html[data-theme="meadow-breeze"] .site-header { background: #eef6dff2; border-bottom: 2px dashed #9cc381; }
+html[data-theme="meadow-breeze"] .brand-star { color: #3a8f4a; }
+html[data-theme="meadow-breeze"] .brand-dot, html[data-theme="meadow-breeze"] .hello-dot { color: #e08e3c; }
+html[data-theme="meadow-breeze"] .main-nav a::after { background: #e08e3c; }
+html[data-theme="meadow-breeze"] .hero { position: relative; isolation: isolate; }
+html[data-theme="meadow-breeze"] .hero::before { content: ''; position: absolute; z-index: -1; inset: -40px 0 0; background: linear-gradient(180deg, #dff0fb 0%, #ecf7e2 46%, #eef6df00 100%); }
+html[data-theme="meadow-breeze"] .hero::after { content: '☁ ☀ ✿'; position: absolute; top: 8px; right: 6%; color: #9cc0d4; font-size: 26px; letter-spacing: 38px; transform: rotate(4deg); pointer-events: none; }
+html[data-theme="meadow-breeze"] .eyebrow, html[data-theme="meadow-breeze"] .green-text { color: #3a8f4a; }
+html[data-theme="meadow-breeze"] .status-dot { background: #e08e3c; box-shadow: 0 0 0 4px #e08e3c25; }
+html[data-theme="meadow-breeze"] .hero h1 { color: #1f4530; }
+html[data-theme="meadow-breeze"] .hero-tagline svg { color: #f0a24a; }
+html[data-theme="meadow-breeze"] .hero-intro { color: #58765f; }
+html[data-theme="meadow-breeze"] .button-primary { border-color: #2f7a40; background: #3a8f4a; border-radius: 30px; box-shadow: 0 5px 0 #2b6b38; }
+html[data-theme="meadow-breeze"] .button-primary:hover { background: #2f7a40; transform: translateY(2px); box-shadow: 0 2px 0 #2b6b38; }
+html[data-theme="meadow-breeze"] .button-secondary { border-radius: 30px; }
+html[data-theme="meadow-breeze"] .hero-art::before { border: 2px dashed #9cc381; border-radius: 45% 55% 50% 50% / 55% 48% 52% 45%; transform: rotate(8deg); }
+html[data-theme="meadow-breeze"] .hero-art::after { background: radial-gradient(ellipse, #d8ecc0 0%, #d8ecc000 68%); }
+html[data-theme="meadow-breeze"] .hero-photo { border-radius: 52% 48% 55% 45% / 48% 52% 48% 52%; transform: rotate(-2deg); border: 5px solid #fffef4; box-shadow: 0 16px 34px #3a8f4a26; }
+html[data-theme="meadow-breeze"] .curiosity-sticker { background: #ffd97d; color: #265034; border-radius: 58% 42% 55% 45% / 48% 55% 45% 52%; box-shadow: 4px 5px 0 #3a8f4a22; }
+html[data-theme="meadow-breeze"] .interest-note { border-radius: 16px 16px 16px 4px; border: 1px solid #cfe0b6; }
+html[data-theme="meadow-breeze"] .interest-note svg { color: #3a8f4a; }
+html[data-theme="meadow-breeze"] .note-pin { background: #a8d47a99; border-radius: 3px; }
+html[data-theme="meadow-breeze"] .art-small-cross { color: #7cb85c; }
+html[data-theme="meadow-breeze"] .explore-section { background: #e3efd2; border-block: 2px dashed #b9d69a; }
+html[data-theme="meadow-breeze"] .explore-section .eyebrow { color: #5c9a4a; }
+html[data-theme="meadow-breeze"] .category-tile { border: 1px solid #26503414; border-radius: 18px; box-shadow: 0 4px 0 #26503410; }
+html[data-theme="meadow-breeze"] .tone-green { background: #d9ecc4; }
+html[data-theme="meadow-breeze"] .tone-orange { background: #ffe3bd; }
+html[data-theme="meadow-breeze"] .tone-purple { background: #e7dff5; }
+html[data-theme="meadow-breeze"] .tone-yellow { background: #fdf3c0; }
+html[data-theme="meadow-breeze"] .tone-pink { background: #f9ddda; }
+html[data-theme="meadow-breeze"] .category-tile:hover { transform: translateY(-7px) rotate(-1.5deg); box-shadow: 0 11px 0 #26503414; }
+html[data-theme="meadow-breeze"] .activity-card { border: 1px solid #cfe0b6; border-radius: 20px; background: #fffef6; }
+html[data-theme="meadow-breeze"] .activity-card:hover { box-shadow: 0 15px 30px #3a8f4a1c; }
+html[data-theme="meadow-breeze"] .card-category { background: #ffd97ded; color: #7a4d12; }
+html[data-theme="meadow-breeze"] .card-link { border-color: #e2ecd2; color: #4a8a58; }
+html[data-theme="meadow-breeze"] .handwritten { color: #d07f2e; }
+html[data-theme="meadow-breeze"] .journal-intro>svg { color: #a5c86a; }
+html[data-theme="meadow-breeze"] .timeline-item { border-color: #d5e3bf; }
+html[data-theme="meadow-breeze"] .category-banner { border: 1px solid #26503414; border-radius: 22px; }
+html[data-theme="meadow-breeze"] .category-tabs a[aria-current=page] { background: #3a8f4a; }
+html[data-theme="meadow-breeze"] .page-end span { color: #7cb85c; }
+html[data-theme="meadow-breeze"] .empty-state { border-color: #b9d69a; }
+html[data-theme="meadow-breeze"] .closing-note>span { color: #a5c86a; }
+html[data-theme="meadow-breeze"] .site-footer { background: #e0ecce; border-top: 2px dashed #b9d69a; }
+html[data-theme="meadow-breeze"] .footer-bottom { border-color: #c6dcb0; }
+html[data-theme="meadow-breeze"] .theme-switcher { color: #265034; }
+html[data-theme="meadow-breeze"] .theme-switcher-trigger { border-color: #b9d69a; background: #fffef0; }
+html[data-theme="meadow-breeze"] .theme-panel { border-color: #b9d69a; background: #fbfdef; }
+html[data-theme="meadow-breeze"] .theme-option:hover, html[data-theme="meadow-breeze"] .theme-option.selected { border-color: #cfe0b6; background: #eef6df; }
+html[data-theme="meadow-breeze"] .theme-option-check { color: #3a8f4a; }
+
+/* Ocean Spray — forest pond morning: misty teal, fern collage, no photo needed. */
+html[data-theme="ocean-spray"] { background: #ecf6ef; color: #17443c; --green: #1e7a63; --muted: #5e8378; --line: #c7dfd1; }
+html[data-theme="ocean-spray"] body { background: #ecf6ef; }
+html[data-theme="ocean-spray"] ::selection { background: #ffd9a8; color: #17443c; }
+html[data-theme="ocean-spray"] .site-header { background: #ecf6eff2; border-bottom: 1px solid #c7dfd1; }
+html[data-theme="ocean-spray"] .brand, html[data-theme="ocean-spray"] .hero h1, html[data-theme="ocean-spray"] .category-tile h3, html[data-theme="ocean-spray"] .category-banner h1 { font-family: Georgia, 'Songti SC', serif; }
+html[data-theme="ocean-spray"] .brand-star, html[data-theme="ocean-spray"] .eyebrow, html[data-theme="ocean-spray"] .green-text { color: #1e7a63; }
+html[data-theme="ocean-spray"] .brand-dot, html[data-theme="ocean-spray"] .hello-dot { color: #e0703a; }
+html[data-theme="ocean-spray"] .main-nav a::after { background: #e0703a; }
+html[data-theme="ocean-spray"] .status-dot { background: #e0703a; box-shadow: 0 0 0 4px #e0703a25; }
+/* The hero turns into a nature desk: two staggered rows of notes, a specimen-card photo, and a leafy collage instead of a framed portrait. */
+html[data-theme="ocean-spray"] .hero { position: relative; isolation: isolate; display: block; width: 100%; max-width: none; min-height: 0; margin: 0; padding: clamp(56px, 6vw, 90px) max(48px, calc((100vw - 1320px) / 2)) 96px; overflow: hidden; background: radial-gradient(720px 480px at 88% -12%, #cfeedd 0%, #cfeedd00 62%), radial-gradient(560px 420px at 4% 108%, #dbeec8 0%, #dbeec800 60%), linear-gradient(180deg, #e5f4ec 0%, #ecf6ef 100%); }
+html[data-theme="ocean-spray"] .hero::before { content: '✿    ✳    ❋    ✿    ✳'; position: absolute; z-index: -1; right: 4%; bottom: 16px; color: #a9d3b8; font-size: 24px; letter-spacing: 34px; transform: rotate(-2deg); opacity: .7; pointer-events: none; }
+html[data-theme="ocean-spray"] .hero::after { display: none; }
+html[data-theme="ocean-spray"] .hero-copy { position: relative; max-width: 720px; margin: 0 auto; text-align: center; }
+html[data-theme="ocean-spray"] .hero h1 { color: #12382f; }
+html[data-theme="ocean-spray"] .hero-tagline svg { color: #8fc7a8; }
+html[data-theme="ocean-spray"] .hero-intro { margin-inline: auto; color: #52796d; }
+html[data-theme="ocean-spray"] .hero-footnote { justify-content: center; color: #7fa08f; }
+html[data-theme="ocean-spray"] .hero-intro, html[data-theme="ocean-spray"] .section-heading p, html[data-theme="ocean-spray"] .category-banner p, html[data-theme="ocean-spray"] .card-content p { color: #52796d; }
+html[data-theme="ocean-spray"] .button-primary { border-color: #1e7a63; background: linear-gradient(120deg, #2b9a78, #1e7a63); border-radius: 30px; box-shadow: 0 5px 0 #155c49; }
+html[data-theme="ocean-spray"] .button-primary:hover { background: #1e7a63; transform: translateY(2px); box-shadow: 0 2px 0 #155c49; }
+html[data-theme="ocean-spray"] .button-secondary { border-radius: 30px; }
+html[data-theme="ocean-spray"] .hero-art { position: relative; z-index: 0; width: min(100%, 1000px); max-width: none; min-height: 375px; margin: 52px auto 0; padding: 0; }
+html[data-theme="ocean-spray"] .hero-art::before { content: ''; position: absolute; left: 2%; right: 2%; top: 36px; border-top: 2px dashed #9cc9b0; transform: rotate(-.6deg); }
+html[data-theme="ocean-spray"] .hero-art::after { background: none; }
+html[data-theme="ocean-spray"] .hero-photo { position: relative; z-index: 2; width: 262px; height: 338px; margin: 26px auto 0; transform: rotate(2.5deg); border: 8px solid #fffef8; border-radius: 150px 150px 16px 16px; box-shadow: 0 16px 34px #1e7a6324; }
+html[data-theme="ocean-spray"] .hero-photo::after { background: linear-gradient(transparent, #155c4980); }
+html[data-theme="ocean-spray"] .photo-caption { left: 50%; bottom: 18px; transform: translateX(-50%); letter-spacing: 2.6px; white-space: nowrap; }
+html[data-theme="ocean-spray"] .orbit-label { top: -16px; right: 16%; color: #6b9a85; }
+html[data-theme="ocean-spray"] .curiosity-sticker { left: 7%; top: 66px; background: #ffd166; color: #7a4d12; transform: rotate(-9deg); box-shadow: 4px 6px 0 #1e7a631f; }
+html[data-theme="ocean-spray"] .interest-note { left: auto; right: 6%; bottom: 62px; border-radius: 18px 18px 18px 5px; border: 1px solid #c7dfd1; border-top: 3px solid #e0703a; transform: rotate(3deg); box-shadow: 0 12px 26px #1e7a6322; }
+html[data-theme="ocean-spray"] .interest-note svg { color: #e0703a; }
+html[data-theme="ocean-spray"] .note-pin { left: 50%; background: #8fc7a880; border-radius: 3px; transform: translateX(-50%) rotate(-3deg); }
+html[data-theme="ocean-spray"] .art-small-cross { display: none; }
+html[data-theme="ocean-spray"] .hero-collage { display: block; }
+html[data-theme="ocean-spray"] .hc-petal { position: absolute; left: 2%; bottom: 4px; width: 118px; height: 118px; display: grid; place-items: center; border-radius: 50% 50% 6px 50%; background: #bfe3c8; color: #1e7a63; font-size: 34px; transform: rotate(10deg); box-shadow: 0 10px 22px #1e7a631a; }
+html[data-theme="ocean-spray"] .hc-quote { position: absolute; left: 24%; bottom: 34px; font-family: 'Segoe Print', 'Bradley Hand', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.35; color: #6b9a85; transform: rotate(-3deg); }
+html[data-theme="ocean-spray"] .hc-quote em { color: #e0703a; }
+html[data-theme="ocean-spray"] .hc-chip { position: absolute; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 50%; font-size: 24px; box-shadow: 0 8px 18px #17443c1a; }
+html[data-theme="ocean-spray"] .hc-leaf { left: 45%; top: 2px; background: #dcefc6; color: #4d8f3f; transform: rotate(-8deg); }
+html[data-theme="ocean-spray"] .hc-swatch { position: absolute; left: 42%; bottom: 58px; width: 46px; height: 46px; border: 3px solid #fffef8; border-radius: 50%; background: #e0703a; transform: rotate(6deg); box-shadow: 0 8px 16px #17443c1f; }
+html[data-theme="ocean-spray"] .hc-seed { right: 18%; top: 44px; background: #ffe3c4; color: #c07a28; transform: rotate(7deg); }
+html[data-theme="ocean-spray"] .explore-section { background: #e0f0e4; border-block: 1px solid #c7dfd1; }
+html[data-theme="ocean-spray"] .category-tile { border: 1px solid #17443c12; border-radius: 20px; box-shadow: 0 4px 0 #17443c0d; }
+html[data-theme="ocean-spray"] .tone-green { background: #d3ecd4; }
+html[data-theme="ocean-spray"] .tone-orange { background: #ffe3c4; }
+html[data-theme="ocean-spray"] .tone-purple { background: #e6e2f2; }
+html[data-theme="ocean-spray"] .tone-yellow { background: #fbf0bf; }
+html[data-theme="ocean-spray"] .tone-pink { background: #f9dedb; }
+html[data-theme="ocean-spray"] .category-tile:hover { transform: translateY(-7px) rotate(1.2deg); box-shadow: 0 11px 0 #17443c12; }
+html[data-theme="ocean-spray"] .activity-card { border: 1px solid #c7dfd1; border-radius: 20px; background: #fdfffb; }
+html[data-theme="ocean-spray"] .activity-card:hover { box-shadow: 0 15px 30px #1e7a631c; }
+html[data-theme="ocean-spray"] .card-category { background: #1e7a63ed; color: #e9fbf3; }
+html[data-theme="ocean-spray"] .card-link, html[data-theme="ocean-spray"] .timeline-item { border-color: #d3e6d9; }
+html[data-theme="ocean-spray"] .card-link { color: #2b8a6c; }
+html[data-theme="ocean-spray"] .handwritten { color: #c9601f; }
+html[data-theme="ocean-spray"] .journal-intro>svg { color: #8fc7a8; }
+html[data-theme="ocean-spray"] .category-banner { border: 1px solid #17443c14; border-radius: 22px; }
+html[data-theme="ocean-spray"] .category-banner h1 { letter-spacing: -2px; }
+html[data-theme="ocean-spray"] .category-tabs a[aria-current=page] { background: #1e7a63; }
+html[data-theme="ocean-spray"] .page-end span { color: #8fc7a8; }
+html[data-theme="ocean-spray"] .empty-state { border-color: #a9d3b8; }
+html[data-theme="ocean-spray"] .closing-note>span { color: #a9d3b8; }
+html[data-theme="ocean-spray"] .site-footer { background: #e0f0e4; border-color: #c7dfd1; }
+html[data-theme="ocean-spray"] .footer-bottom { border-color: #cbe2d2; }
+html[data-theme="ocean-spray"] .theme-switcher { color: #17443c; }
+html[data-theme="ocean-spray"] .theme-switcher-trigger { border-color: #a9d3b8; background: #f6fdf6; }
+html[data-theme="ocean-spray"] .theme-panel { border-color: #a9d3b8; background: #f6fdf6; }
+html[data-theme="ocean-spray"] .theme-option:hover, html[data-theme="ocean-spray"] .theme-option.selected { border-color: #c7dfd1; background: #ecf6ef; }
+html[data-theme="ocean-spray"] .theme-option-check { color: #1e7a63; }
+
+/* Sunset Grove — golden hour through the trees: warm sand, berry accents, light-leaf shadows. */
+html[data-theme="sunset-grove"] { background: #fff4dd; color: #4c3a25; --green: #2e5d43; --muted: #8b7a5e; --line: #ecdcbc; }
+html[data-theme="sunset-grove"] body { background: #fff4dd; }
+html[data-theme="sunset-grove"] ::selection { background: #ffd166; color: #4c3a25; }
+html[data-theme="sunset-grove"] .site-header { background: #fff4ddf2; border-bottom: 1px solid #ecdcbc; }
+html[data-theme="sunset-grove"] .brand-star { color: #c96f2a; }
+html[data-theme="sunset-grove"] .brand-dot, html[data-theme="sunset-grove"] .hello-dot { color: #c22b4a; }
+html[data-theme="sunset-grove"] .main-nav a::after { background: #c96f2a; }
+html[data-theme="sunset-grove"] .eyebrow, html[data-theme="sunset-grove"] .green-text { color: #a8541f; }
+html[data-theme="sunset-grove"] .status-dot { background: #ffb703; box-shadow: 0 0 0 4px #ffb7032a; }
+html[data-theme="sunset-grove"] .hero { position: relative; isolation: isolate; }
+html[data-theme="sunset-grove"] .hero::before { content: ''; position: absolute; z-index: -1; right: -10%; top: -90px; width: 540px; height: 540px; border-radius: 50%; background: radial-gradient(circle, #ffd166 0%, #ff9e5e 52%, #ff9e5e00 74%); opacity: .38; pointer-events: none; }
+html[data-theme="sunset-grove"] .hero h1 { color: #462f1b; }
+html[data-theme="sunset-grove"] .hero-tagline svg { color: #f08a4b; }
+html[data-theme="sunset-grove"] .hero-intro, html[data-theme="sunset-grove"] .section-heading p, html[data-theme="sunset-grove"] .category-banner p, html[data-theme="sunset-grove"] .card-content p { color: #8b7a5e; }
+html[data-theme="sunset-grove"] .button-primary { border-color: #a8541f; background: linear-gradient(120deg, #c96f2a, #a8541f); border-radius: 30px; box-shadow: 0 5px 0 #7d3d14; }
+html[data-theme="sunset-grove"] .button-primary:hover { background: #a8541f; transform: translateY(2px); box-shadow: 0 2px 0 #7d3d14; }
+html[data-theme="sunset-grove"] .button-secondary { border-radius: 30px; }
+html[data-theme="sunset-grove"] .hero-art::before { border: 2px dashed #d9a45b; border-radius: 50% 50% 46% 54% / 52% 48% 52% 48%; transform: rotate(7deg); }
+html[data-theme="sunset-grove"] .hero-art::after { background: radial-gradient(ellipse, #ffe3b0 0%, #ffe3b000 68%); }
+html[data-theme="sunset-grove"] .hero-photo { border-radius: 50% 50% 12px 12px; transform: rotate(-2deg); border: 6px solid #fffdf4; box-shadow: 0 18px 36px #a8541f26; }
+html[data-theme="sunset-grove"] .curiosity-sticker { background: #c22b4a; color: #ffedd6; transform: rotate(-11deg); box-shadow: 4px 5px 0 #a8541f30; }
+html[data-theme="sunset-grove"] .curiosity-sticker svg { color: #ffd166; }
+html[data-theme="sunset-grove"] .interest-note { background: #fffdf2; border-radius: 4px 18px 18px 18px; border: 1px solid #ecdcbc; }
+html[data-theme="sunset-grove"] .note-small { color: #c96f2a; }
+html[data-theme="sunset-grove"] .interest-note svg { color: #c22b4a; }
+html[data-theme="sunset-grove"] .note-pin { background: #ffb70366; border-radius: 3px; }
+html[data-theme="sunset-grove"] .art-small-cross { color: #dd8f3f; }
+html[data-theme="sunset-grove"] .explore-section { background: #f9e8c8; border-block: 1px solid #ecdcbc; }
+html[data-theme="sunset-grove"] .category-tile { border: 1px solid #4c3a2512; border-radius: 18px 18px 18px 6px; box-shadow: 0 4px 0 #4c3a2510; }
+html[data-theme="sunset-grove"] .tone-green { background: #e2e8c2; }
+html[data-theme="sunset-grove"] .tone-orange { background: #ffdfae; }
+html[data-theme="sunset-grove"] .tone-purple { background: #ecdcf0; }
+html[data-theme="sunset-grove"] .tone-yellow { background: #ffe9a8; }
+html[data-theme="sunset-grove"] .tone-pink { background: #f8d4c9; }
+html[data-theme="sunset-grove"] .category-tile:hover { transform: translateY(-7px) rotate(-1.4deg); box-shadow: 0 11px 0 #4c3a2514; }
+html[data-theme="sunset-grove"] .activity-card { border: 1px solid #ecdcbc; border-radius: 18px; background: #fffdf2; }
+html[data-theme="sunset-grove"] .activity-card:hover { box-shadow: 0 15px 30px #a8541f1c; }
+html[data-theme="sunset-grove"] .card-category { background: #c22b4aed; color: #ffedd6; }
+html[data-theme="sunset-grove"] .card-link, html[data-theme="sunset-grove"] .timeline-item { border-color: #f0e0c0; }
+html[data-theme="sunset-grove"] .card-link { color: #a8541f; }
+html[data-theme="sunset-grove"] .handwritten { color: #c22b4a; }
+html[data-theme="sunset-grove"] .journal-intro>svg { color: #dd8f3f; }
+html[data-theme="sunset-grove"] .category-banner { border: 1px solid #4c3a2514; border-radius: 22px; }
+html[data-theme="sunset-grove"] .category-banner h1 { letter-spacing: -2.5px; }
+html[data-theme="sunset-grove"] .category-tabs a[aria-current=page] { background: #a8541f; }
+html[data-theme="sunset-grove"] .page-end span { color: #dd8f3f; }
+html[data-theme="sunset-grove"] .empty-state { border-color: #e0c38f; }
+html[data-theme="sunset-grove"] .closing-note>span { color: #e8b96a; }
+html[data-theme="sunset-grove"] .closing-note em { color: #a8541f; }
+html[data-theme="sunset-grove"] .site-footer { background: #f9e8c8; border-color: #ecdcbc; }
+html[data-theme="sunset-grove"] .footer-bottom { border-color: #eedcba; }
+html[data-theme="sunset-grove"] .theme-switcher { color: #4c3a25; }
+html[data-theme="sunset-grove"] .theme-switcher-trigger { border-color: #e0c38f; background: #fffaf0; }
+html[data-theme="sunset-grove"] .theme-panel { border-color: #e0c38f; background: #fffaf0; }
+html[data-theme="sunset-grove"] .theme-option:hover, html[data-theme="sunset-grove"] .theme-option.selected { border-color: #ecdcbc; background: #fdf0d8; }
+html[data-theme="sunset-grove"] .theme-option-check { color: #a8541f; }
+
+@media (max-width: 600px) {
+  .hero { width: calc(100% - 40px); min-height: 0; padding-block: 42px 55px; gap: 28px; }
+  .hero-copy { margin-left: 0; }
+  .hero h1 { font-size: clamp(48px, 11.6vw, 66px); line-height: 1.04; }
+  .hero-art { max-width: 350px; padding-left: 26px; padding-right: 16px; }
+  .hero-photo { height: 370px; }
+}
+
+/* Student ID beside the home wordmark. */
+.brand-lockup { display: flex; align-items: center; gap: 13px; min-width: 0; }
+.brand-id { padding-left: 13px; border-left: 1px solid #d8ddcd; color: #788373; font-size: 14px; font-weight: 700; letter-spacing: 1.2px; white-space: nowrap; }
+
+/* A quiet landscape interlude replaces the home page's story and timeline blocks. */
+.nature-interlude { padding-block: 74px 68px; }
+.nature-copy { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 25px; }
+.nature-copy h2 { margin: 9px 0 0; color: #294638; font-family: Georgia, 'Songti SC', serif; font-size: clamp(30px, 3vw, 42px); letter-spacing: -1.5px; }
+.nature-copy h2 em { color: #6f8b65; font-weight: 400; }
+.nature-copy p { max-width: 300px; margin: 0 0 4px; color: #788173; font-size: 12px; line-height: 1.8; }
+.nature-landscape { position: relative; height: clamp(220px, 27vw, 365px); overflow: hidden; border: 1px solid #dfe4d4; border-radius: 8px; background: #e8efe0; box-shadow: 0 16px 38px #2b443414; }
+.nature-landscape svg { width: 100%; height: 100%; }
+.landscape-label { position: absolute; right: 19px; bottom: 16px; padding: 8px 11px; border: 1px solid #ffffff99; border-radius: 20px; background: #f7f7efcf; color: #49634d; font-size: 8px; font-weight: 700; letter-spacing: 1.5px; backdrop-filter: blur(8px); }
+.nature-caption { display: flex; align-items: center; justify-content: center; gap: 18px; padding-top: 20px; color: #7c8874; font-family: Georgia, 'STKaiti', 'KaiTi', serif; font-size: 14px; font-style: italic; text-align: center; }
+.nature-caption-mark { color: #d48762; font-family: Georgia, serif; font-size: 22px; font-style: normal; }
+
+@media (max-width: 600px) {
+  .brand-lockup { gap: 8px; }
+  .brand-id { padding-left: 8px; font-size: 8px; letter-spacing: .7px; }
+  .nature-interlude { padding-block: 46px 40px; }
+  .nature-copy { align-items: flex-start; flex-direction: column; gap: 7px; margin-bottom: 18px; }
+  .nature-copy h2 { font-size: 30px; }
+  .nature-copy p { max-width: 100%; }
+  .nature-landscape { height: 220px; border-radius: 6px; }
+  .nature-caption { gap: 8px; font-size: 12px; }
+}
+@media (min-width: 601px) and (max-width: 1100px) {
+  .hero { width: calc(100% - 64px); grid-template-columns: minmax(0, 1fr) minmax(310px, .9fr); gap: 28px; min-height: 600px; padding-block: 58px; }
+  .hero-copy { margin-left: 0; }
+  .hero h1 { font-size: clamp(52px, 5.8vw, 64px); letter-spacing: -2.8px; }
+  .hero-intro { font-size: 14px; }
+  .hero-art { max-width: 430px; padding-inline: 20px 12px; }
+  .hero-photo { height: 410px; }
+}
+@media (max-width: 600px) {
+  .theme-switcher { top: auto; bottom: 22px; transform: none; }
+  .theme-switcher-trigger { writing-mode: horizontal-tb; border-radius: 14px 0 0 14px; padding: 11px; }
+  .theme-panel { top: auto; bottom: 0; transform: none; right: 55px; width: min(250px, calc(100vw - 78px)); }
+}
+
+@media (max-width: 1100px) {
+  html[data-theme="ocean-spray"] .hero { padding: 60px 40px 88px; }
+  html[data-theme="ocean-spray"] .hc-quote { display: none; }
+  html[data-theme="ocean-spray"] .hc-swatch { display: none; }
+  html[data-theme="ocean-spray"] .curiosity-sticker { left: 3%; }
+  html[data-theme="ocean-spray"] .interest-note { right: 2%; }
+  html[data-theme="ocean-spray"] .hc-seed { right: 10%; }
+}
+@media (max-width: 600px) {
+  html[data-theme="meadow-breeze"] .hero::after { font-size: 18px; letter-spacing: 20px; right: 4%; }
+  html[data-theme="ocean-spray"] .hero { padding: 42px 24px 64px; }
+  html[data-theme="ocean-spray"] .hero::before { display: none; }
+  html[data-theme="ocean-spray"] .hero-art { min-height: 0; margin-top: 36px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; }
+  html[data-theme="ocean-spray"] .hero-art::before { display: none; }
+  html[data-theme="ocean-spray"] .orbit-label, html[data-theme="ocean-spray"] .hc-swatch, html[data-theme="ocean-spray"] .hc-seed { display: none; }
+  html[data-theme="ocean-spray"] .hero-photo { order: 1; width: 224px; height: 290px; margin: 0; }
+  html[data-theme="ocean-spray"] .curiosity-sticker { position: static; order: 2; width: 108px; height: 108px; font-size: 23px; }
+  html[data-theme="ocean-spray"] .hc-petal { position: static; order: 3; width: 92px; height: 92px; font-size: 27px; }
+  html[data-theme="ocean-spray"] .hc-quote { position: static; order: 4; width: 100%; text-align: center; font-size: 17px; }
+  html[data-theme="ocean-spray"] .hc-chip.hc-leaf { position: static; order: 5; width: 54px; height: 54px; font-size: 20px; }
+  html[data-theme="ocean-spray"] .interest-note { position: static; order: 6; width: 232px; margin-top: 6px; }
+  html[data-theme="sunset-grove"] .hero::before { width: 300px; height: 300px; right: -30%; top: -60px; }
+}

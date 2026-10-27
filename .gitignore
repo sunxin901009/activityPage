@@ -1,0 +1,13 @@
+node_modules/
+.nuxt/
+.output/
+.env
+.env.production
+.tools/
+.cache/
+test-results/
+coverage/
+*.log
+deploy/backups/
+deploy/certs/
+deploy/backup.env
