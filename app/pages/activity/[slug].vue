@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import type { ActivityDetail } from '#shared/types'
 import { assetUrl, formatDate } from '#shared/format'
 const route = useRoute()
-const { data: activity, error } = await useFetch<ActivityDetail>(() => `/api/activities/${encodeURIComponent(String(route.params.slug))}`)
+const { data: activity, error } = await useActivity(() => String(route.params.slug))
 if (error.value) throw createError({ statusCode: error.value.statusCode || 503, statusMessage: error.value.statusCode === 404 ? 'This activity does not exist or has not been published.' : 'This story is temporarily unavailable. Please try again later.' })
 const { data: portfolio } = await usePortfolio()
 const gallery = computed(() => activity.value?.media.filter(item => item.kind === 'gallery') || [])

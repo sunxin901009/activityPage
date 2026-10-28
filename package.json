@@ -6,6 +6,7 @@
     "dev": "nuxt dev --host 127.0.0.1",
     "dev:demo": "node scripts/demo.mjs dev",
     "build": "nuxt build",
+    "generate:static": "node scripts/generate-static.mjs",
     "preview": "nuxt preview",
     "typecheck": "nuxt typecheck",
     "test": "vitest run",

@@ -1,6 +1,8 @@
 node_modules/
 .nuxt/
 .output/
+public/static-data/
+public/static-content/
 .env
 .env.production
 .tools/

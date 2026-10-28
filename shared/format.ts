@@ -8,6 +8,6 @@ export function formatStoryCount(count: number) {
 
 export function assetUrl(file: string | null, width?: number) {
   if (!file) return null
-  if (file.startsWith('/images/')) return file
+  if (file.startsWith('/images/') || file.includes('/static-content/')) return file
   return `/api/media/${encodeURIComponent(file)}${width ? `?width=${width}` : ''}`
 }
