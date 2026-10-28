@@ -225,37 +225,28 @@ html[data-theme="sunset-grove"] .theme-option-check { color: #a8541f; }
 .brand-lockup { display: flex; align-items: center; gap: 13px; min-width: 0; }
 .brand-id { padding-left: 13px; border-left: 1px solid #d8ddcd; color: #788373; font-size: 14px; font-weight: 700; letter-spacing: 1.2px; white-space: nowrap; }
 
-/* A quiet landscape interlude replaces the home page's story and timeline blocks. */
-.nature-interlude { padding-block: 74px 68px; }
-.nature-copy { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 25px; }
-.nature-copy h2 { margin: 9px 0 0; color: #294638; font-family: Georgia, 'Songti SC', serif; font-size: clamp(30px, 3vw, 42px); letter-spacing: -1.5px; }
-.nature-copy h2 em { color: #6f8b65; font-weight: 400; }
-.nature-copy p { max-width: 300px; margin: 0 0 4px; color: #788173; font-size: 12px; line-height: 1.8; }
-.nature-photo { position: relative; margin: 0; height: clamp(300px, 38vw, 480px); overflow: hidden; border: 10px solid #fffef8; border-radius: 200px 200px 10px 10px; background: #dfe8d2; box-shadow: 0 20px 42px #2b44341c; transform: rotate(-.7deg); transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s; }
-.nature-photo:hover { transform: rotate(0deg) translateY(-4px); box-shadow: 0 28px 52px #2b443426; }
-.nature-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
-.nature-photo:hover img { transform: scale(1.035); }
-.nature-photo-empty { display: grid; place-items: center; height: 100%; color: #a9bfa0; }
+/* The nature photo becomes a soft band that breathes with the page — full-bleed, gently faded, text floating inside. */
+.nature-interlude { position: relative; margin-block: 74px 68px; }
+.nature-band { position: relative; height: clamp(340px, 42vw, 560px); overflow: hidden; }
+.nature-band img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; transform: scale(1.06); transition: transform 1.4s cubic-bezier(.2,.7,.2,1); }
+.nature-interlude:hover .nature-band img { transform: scale(1.1); }
+.nature-band-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, #f7f7ef 0%, #f7f7ef00 8%, #f7f7ef00 90%, #f7f7ef 100%); }
+.nature-photo-empty { display: grid; place-items: center; height: 100%; background: #dfe8d2; color: #a9bfa0; }
 .nature-photo-empty svg { width: 90px; height: 90px; }
-.nature-tape { position: absolute; z-index: 2; top: -12px; width: 96px; height: 26px; background: #e4a2858c; box-shadow: 0 2px 6px #2b44341a; }
-.nature-tape-l { left: 12%; transform: rotate(-14deg); }
-.nature-tape-r { right: 12%; transform: rotate(12deg); }
-.nature-figcaption { position: absolute; left: 20px; right: 20px; bottom: 16px; z-index: 1; display: flex; justify-content: space-between; gap: 12px; color: #fffef6; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-shadow: 0 1px 8px #20301fb3; }
-.nature-figcaption::before { content: ''; position: absolute; z-index: -1; inset: -70px -20px -16px; background: linear-gradient(transparent, #20301f4d); pointer-events: none; }
-.nature-caption { display: flex; align-items: center; justify-content: center; gap: 14px; padding-top: 24px; color: #7c8874; font-family: Georgia, 'STKaiti', 'KaiTi', serif; font-size: 15px; font-style: italic; text-align: center; }
-.nature-caption-mark { color: #d48762; font-family: Georgia, serif; font-size: 22px; font-style: normal; }
+.nature-copy { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px; padding-block: 40px; }
+.nature-copy .eyebrow { color: #fffef6; letter-spacing: 2.6px; }
+.nature-copy .status-dot { background: #ffd166; box-shadow: 0 0 0 4px #ffd16633; }
+.nature-copy h2 { margin: 0; color: #fffef6; font-family: Georgia, 'Songti SC', serif; font-size: clamp(34px, 4.2vw, 56px); letter-spacing: -2px; text-shadow: 0 2px 18px #20301f40; }
+.nature-copy h2 em { color: #ffe9b8; font-weight: 400; }
+.nature-copy p { max-width: 360px; margin: 0; color: #f1edda; font-size: 13px; line-height: 1.9; text-shadow: 0 1px 10px #20301f4d; }
 
 @media (max-width: 600px) {
   .brand-lockup { gap: 8px; }
   .brand-id { padding-left: 8px; font-size: 8px; letter-spacing: .7px; }
-  .nature-interlude { padding-block: 46px 40px; }
-  .nature-copy { align-items: flex-start; flex-direction: column; gap: 7px; margin-bottom: 18px; }
-  .nature-copy h2 { font-size: 30px; }
-  .nature-copy p { max-width: 100%; }
-  .nature-photo { height: 250px; border-width: 7px; border-radius: 130px 130px 8px 8px; }
-  .nature-tape { width: 64px; height: 20px; }
-  .nature-figcaption { font-size: 7px; letter-spacing: 1.4px; }
-  .nature-caption { gap: 8px; font-size: 12px; }
+  .nature-interlude { margin-block: 46px 40px; }
+  .nature-band { height: 320px; }
+  .nature-copy h2 { font-size: 34px; }
+  .nature-copy p { max-width: 300px; font-size: 12px; }
 }
 @media (min-width: 601px) and (max-width: 1100px) {
   .hero { width: calc(100% - 64px); grid-template-columns: minmax(0, 1fr) minmax(310px, .9fr); gap: 28px; min-height: 600px; padding-block: 58px; }
