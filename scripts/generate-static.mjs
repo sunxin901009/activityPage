@@ -2,7 +2,7 @@ import { spawn } from 'node:child_process'
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { extname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import sanitizeHtml from 'sanitize-html'
+import { sanitizeBody } from '../shared/rich-text.ts'
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)))
 const directusUrl = (process.env.DIRECTUS_URL || process.env.NUXT_DIRECTUS_URL || '').replace(/\/$/, '')
@@ -51,9 +51,7 @@ addFileId(profile.nature_photo)
 for (const activity of activities) {
   addFileId(activity.cover)
   for (const media of activity.media || []) addFileId(media.file)
-  for (const match of String(activity.body || '').matchAll(/(?:^|\/)assets\/([a-f0-9-]{36})(?:\.[a-z0-9]+)?(?:[?#"'&]|$)/gi)) {
-    fileIds.add(match[1])
-  }
+  sanitizeBody(activity.body || '', id => { fileIds.add(id); return undefined })
 }
 
 const fileMap = new Map()
@@ -88,8 +86,10 @@ const publicProfile = {
 const details = activities.map((activity) => ({
   ...activity,
   cover: mapFile(activity.cover),
-  body: sanitizeBody(activity.body || ''),
-  media: (activity.media || []).map(media => ({ ...media, file: mapFile(media.file) })).filter(media => media.file),
+  body: sanitizeBody(activity.body || '', id => fileMap.get(id)?.staticPath),
+  media: (activity.media || []).map(media => ({
+    ...media, file: mapFile(media.file), mime_type: fileMap.get(typeof media.file === 'string' ? media.file : media.file?.id)?.type,
+  })).filter(media => media.file),
 }))
 const portfolio = {
   profile: publicProfile,
@@ -140,25 +140,9 @@ function safeExtension(filename, mimeType) {
   const mimeExtensions = {
     'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp', 'image/gif': '.gif',
     'image/avif': '.avif', 'image/svg+xml': '.svg', 'application/pdf': '.pdf',
+    'video/mp4': '.mp4', 'video/webm': '.webm', 'video/ogg': '.ogv', 'video/quicktime': '.mov',
   }
   return mimeExtensions[mimeType] || '.bin'
-}
-
-function sanitizeBody(body) {
-  return sanitizeHtml(body, {
-    allowedTags: ['p', 'br', 'h2', 'h3', 'h4', 'strong', 'em', 'u', 's', 'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'figure', 'figcaption', 'hr', 'table', 'thead', 'tbody', 'tr', 'th', 'td'],
-    allowedAttributes: { a: ['href', 'title'], img: ['src', 'alt', 'width', 'height', 'loading'] },
-    allowedSchemes: ['https', 'http', 'mailto'],
-    transformTags: {
-      a: (_tag, attrs) => ({ tagName: 'a', attribs: { ...attrs, rel: 'noopener noreferrer' } }),
-      img: (_tag, attrs) => {
-        const match = attrs.src?.match(/(?:^|\/)assets\/([a-f0-9-]{36})(?:\.[a-z0-9]+)?(?:[?#]|$)/i)
-        const src = match ? fileMap.get(match[1])?.staticPath : attrs.src
-        return { tagName: 'img', attribs: { ...attrs, src: src || '', loading: 'lazy' } }
-      },
-    },
-    exclusiveFilter: frame => frame.tag === 'img' && !frame.attribs.src,
-  })
 }
 
 function normalizeBasePath(path) {

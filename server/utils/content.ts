@@ -1,27 +1,15 @@
 import { createError } from 'h3'
-import sanitizeHtml from 'sanitize-html'
+import { sanitizeBody } from '../../shared/rich-text'
 import { activities as demoActivities, categories as demoCategories, profile as demoProfile } from '../../shared/demo'
-import type { Activity, ActivityDetail, Category, Portfolio, Profile } from '../../shared/types'
+import type { Activity, ActivityDetail, Category, Media, Portfolio, Profile } from '../../shared/types'
 
 type ContentConfig = { contentMode: string; directusUrl: string }
 const activityFields = 'id,slug,title,date,summary,role,location,cover,cover_alt,category.*,featured,sort'
 
-export function sanitizeBody(body: string) {
-  return sanitizeHtml(body, {
-    allowedTags: ['p', 'br', 'h2', 'h3', 'h4', 'strong', 'em', 'u', 's', 'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'figure', 'figcaption', 'hr', 'table', 'thead', 'tbody', 'tr', 'th', 'td'],
-    allowedAttributes: { a: ['href', 'title'], img: ['src', 'alt', 'width', 'height', 'loading'] },
-    allowedSchemes: ['https', 'http', 'mailto'],
-    transformTags: {
-      a: (_tag, attrs) => ({ tagName: 'a', attribs: { ...attrs, rel: 'noopener noreferrer' } }),
-      img: (_tag, attrs) => {
-        // Route rich-text images through the permission-checked same-origin media endpoint.
-        const match = attrs.src?.match(/(?:^|\/)assets\/([a-f0-9-]{36})(?:\.[a-z0-9]+)?(?:[?#]|$)/i)
-        const src = match ? `/api/media/${match[1]}?width=1200` : attrs.src
-        return { tagName: 'img', attribs: { ...attrs, src: src || '', loading: 'lazy' } }
-      },
-    },
-    exclusiveFilter: frame => frame.tag === 'img' && !/^\/api\/media\/[a-f0-9-]{36}(?:\?|$)/i.test(frame.attribs.src || ''),
-  })
+export { sanitizeBody }
+
+type CmsActivity = Omit<ActivityDetail, 'media'> & {
+  media: Array<Omit<Media, 'file'> & { file: { id: string; type: string | null } | null }>
 }
 
 export async function cmsRead<T>(config: ContentConfig, path: string, query: Record<string, string> = {}): Promise<T> {
@@ -63,11 +51,17 @@ export async function getActivity(config: ContentConfig, slug: string): Promise<
   let activity: ActivityDetail | undefined
   if (isDemo(config)) activity = demoActivities.find(item => item.slug === slug)
   else {
-    const items = await cmsRead<ActivityDetail[]>(config, 'items/activities', {
-      fields: `${activityFields},body,outcome,reflection,media.id,media.file,media.kind,media.caption,media.sort`,
+    const items = await cmsRead<CmsActivity[]>(config, 'items/activities', {
+      fields: `${activityFields},body,outcome,reflection,media.id,media.file.id,media.file.type,media.kind,media.caption,media.sort`,
       'filter[slug][_eq]': slug, 'filter[status][_eq]': 'published', limit: '1', 'deep[media][_sort]': 'sort',
     })
-    activity = items[0]
+    const item = items[0]
+    if (item) activity = {
+      ...item,
+      media: (item.media || []).flatMap(media => media.file
+        ? [{ ...media, file: media.file.id, mime_type: media.file.type }]
+        : []),
+    }
   }
   if (!activity) throw createError({ statusCode: 404, statusMessage: 'This activity does not exist or has not been published.' })
   return { ...activity, body: sanitizeBody(activity.body || ''), media: activity.media || [] }

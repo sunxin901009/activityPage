@@ -22,6 +22,7 @@ export interface Profile {
 export interface Media {
   id: number
   file: string
+  mime_type?: string | null
   kind: 'gallery' | 'attachment'
   caption: string
   sort: number

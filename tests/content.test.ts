@@ -26,6 +26,18 @@ describe('public content boundary', () => {
   it('returns 404 for missing demo activities', async () => {
     await expect(getActivity({ ...config, contentMode: 'demo' }, 'not-present')).rejects.toMatchObject({ statusCode: 404 })
   })
+  it('includes file MIME types so gallery videos are distinguishable from images', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(Response.json({ data: [{
+      slug: 'video-story', body: '', media: [
+        { id: 1, file: { id: 'public-video', type: 'video/mp4' }, kind: 'gallery' },
+        { id: 2, file: null, kind: 'gallery' },
+      ],
+    }] }))
+    vi.stubGlobal('fetch', fetchMock)
+    const activity = await getActivity(config, 'video-story')
+    expect(activity.media).toEqual([{ id: 1, file: 'public-video', mime_type: 'video/mp4', kind: 'gallery' }])
+    expect(fetchMock.mock.calls[0]![0].searchParams.get('fields')).toContain('media.file.type')
+  })
   it('rejects invalid slugs before contacting the CMS', async () => {
     const fetchMock = vi.fn()
     vi.stubGlobal('fetch', fetchMock)
@@ -44,6 +56,33 @@ describe('public content boundary', () => {
 })
 
 describe('rich text safety', () => {
+  const videoId = '10000000-0000-4000-8000-000000000001'
+  const posterId = '10000000-0000-4000-8000-000000000002'
+  it('retains uploaded videos and posters without tokens, autoplay or event handlers', () => {
+    const clean = sanitizeBody(`<video src="https://cms.test/assets/${videoId}.mp4?access_token=secret" poster="/assets/${posterId}" autoplay onerror="alert(1)"></video>`)
+    expect(clean).toContain(`src="/api/media/${videoId}"`)
+    expect(clean).toContain(`poster="/api/media/${posterId}?width=1200"`)
+    expect(clean).toContain('controls')
+    expect(clean).toContain('playsinline')
+    expect(clean).toContain('preload="metadata"')
+    expect(clean).not.toMatch(/secret|autoplay|onerror/)
+  })
+  it('supports nested video sources without assigning an empty src to their parent', () => {
+    const clean = sanitizeBody(`<video><source src="/assets/${videoId}" type="video/mp4"></video>`)
+    expect(clean).toContain(`<source src="/api/media/${videoId}" type="video/mp4"`)
+    expect(clean).not.toContain('src=""')
+  })
+  it('removes remote and executable video sources and posters', () => {
+    const clean = sanitizeBody('<video src="javascript:alert(1)" poster="https://tracker.test/pixel"><source src="https://remote.test/video.mp4"><source src="data:video/mp4;base64,aaa"></video>')
+    expect(clean).not.toMatch(/javascript:|tracker|remote|data:|<source|src=|poster=/)
+  })
+  it('uses the same media sanitization for static exports, including repository base paths', () => {
+    const clean = sanitizeBody(`<video poster="/assets/${posterId}"><source src="/api/media/${videoId}?token=secret" type="video/mp4"></video>`,
+      (id, image) => `/portfolio/static-content/${id}${image ? '.jpg' : '.mp4'}`)
+    expect(clean).toContain(`src="/portfolio/static-content/${videoId}.mp4"`)
+    expect(clean).toContain(`poster="/portfolio/static-content/${posterId}.jpg"`)
+    expect(clean).not.toMatch(/\/api\/media|\/assets\/|secret/)
+  })
   it('removes script, event handlers and script URLs while retaining editorial markup', () => {
     const clean = sanitizeBody('<h2>Title</h2><script>alert(1)</script><p onclick="alert(1)">Text</p><a href="javascript:alert(1)">Link</a><iframe src="https://evil.test"></iframe>')
     expect(clean).toContain('<h2>Title</h2>')
