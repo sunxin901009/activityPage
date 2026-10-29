@@ -124,6 +124,18 @@ useSeoMeta({
             }}</span>
           </NuxtLink>
         </div>
+
+        <div class="category-groups">
+          <div v-for="category in data.categories" :key="category.id" class="category-group">
+            <div class="category-group-heading">
+              <h3><span :class="['group-dot', `tone-${category.color}`]" />{{ category.title }}</h3>
+              <NuxtLink :to="`/activities/${category.slug}`" class="text-link">View all <ArrowIcon /></NuxtLink>
+            </div>
+            <div class="activity-grid">
+              <ActivityCard v-for="(activity, index) in data.activities.filter(a => a.category.slug === category.slug)" :key="activity.id" :activity="activity" :index="index" />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
