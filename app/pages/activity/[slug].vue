@@ -34,10 +34,12 @@ useSeoMeta({ title: () => `${activity.value?.title} · ${portfolio.value?.profil
           <h2>{{ galleryTitle }}</h2>
           <div class="article-gallery">
             <figure v-for="media in gallery" :key="media.id">
-              <video v-if="media.mime_type?.startsWith('video/')" :src="assetUrl(media.file)!" controls playsinline preload="metadata" :aria-label="media.caption || activity.title">
-                Your browser does not support this video. <a :href="assetUrl(media.file)!" download>Download video</a>
-              </video>
-              <a v-else :href="assetUrl(media.file)!" target="_blank" rel="noopener noreferrer" :aria-label="`View full image: ${media.caption || activity.title}`"><img :src="assetUrl(media.file, 800)!" :alt="media.caption || activity.title" loading="lazy"></a>
+              <div class="gallery-frame" :class="{ 'video-frame': media.mime_type?.startsWith('video/') }">
+                <video v-if="media.mime_type?.startsWith('video/')" :src="assetUrl(media.file)!" controls playsinline preload="metadata" :aria-label="media.caption || activity.title">
+                  Your browser does not support this video. <a :href="assetUrl(media.file)!" download>Download video</a>
+                </video>
+                <a v-else :href="assetUrl(media.file)!" target="_blank" rel="noopener noreferrer" :aria-label="`View full image: ${media.caption || activity.title}`"><img :src="assetUrl(media.file, 800)!" :alt="media.caption || activity.title" loading="lazy"></a>
+              </div>
               <figcaption>{{ media.caption }}</figcaption>
             </figure>
           </div>
