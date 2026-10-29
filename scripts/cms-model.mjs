@@ -355,6 +355,7 @@ export const publicPermissions = [
     collection: 'directus_files',
     fields: [
       'id',
+      'is_public',
       'storage',
       'filename_disk',
       'filename_download',

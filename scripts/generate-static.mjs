@@ -56,7 +56,7 @@ for (const activity of activities) {
 
 const fileMap = new Map()
 if (fileIds.size) {
-  const files = await readData('items/directus_files', {
+  const files = await readData('files', {
     fields: 'id,filename_download,type',
     'filter[id][_in]': [...fileIds].join(','),
     limit: '-1',

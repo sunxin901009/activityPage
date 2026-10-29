@@ -11,7 +11,7 @@ The Pages build exports published content and public media from Directus into th
 5. If using a custom domain, add the `PAGES_SITE_URL` variable (for example, `https://portfolio.example.com`). GitHub Pages still needs the domain and DNS configured in **Settings → Pages**.
 6. Run the workflow. Its deployment job reports the published Pages URL.
 
-The Directus public role must be able to read `profile`, `categories`, published `activities`, `directus_files`, and the corresponding public assets. The exporter stops with an error if a referenced file is private or unavailable. Anything exported into the Pages artifact is public, so only use content and files intended for public viewing.
+The Directus public role must be able to read `profile`, `categories`, published `activities`, `directus_files`, and the corresponding public assets. For `directus_files`, permit the `is_public` field because it is used by the row filter, plus `id`, `filename_download`, and `type` for export. The exporter stops with an error if a referenced file is private or unavailable. Anything exported into the Pages artifact is public, so only use content and files intended for public viewing.
 
 ## Generate locally
 
