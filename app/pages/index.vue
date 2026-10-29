@@ -34,7 +34,7 @@ useSeoMeta({ title: () => `${data.value?.profile.name} · A Journey of Curiosity
 
     <section id="explore" class="explore-section">
       <div class="shell">
-        <div class="section-heading"><div><span class="eyebrow">MY LITTLE UNIVERSE</span><h2>Every passion <span class="serif-italic">leaves a mark.</span></h2></div><p>Five paths. One unfolding journey.<br>Turn a page and get to know me.</p></div>
+        <div class="section-heading"><div><span class="eyebrow">MY LITTLE UNIVERSE</span><h2>Every passion <span class="serif-italic">leaves a mark.</span></h2></div><p>Four paths. One unfolding journey.<br>Turn a page and get to know me.</p></div>
         <div class="category-grid">
           <NuxtLink v-for="(category, index) in data.categories" :key="category.id" :to="`/activities/${category.slug}`" :class="['category-tile', `tone-${category.color}`]">
             <div class="tile-top"><span>0{{ index + 1 }}</span><span class="tile-arrow">↗</span></div>
