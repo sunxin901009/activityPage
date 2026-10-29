@@ -17,7 +17,8 @@ defineProps<{ activity: Activity; index?: number }>()
         <!-- <time :datetime="activity.date">{{ formatDate(activity.date) }}</time> -->
         <span>{{ activity.role }}</span>
       </div>
-      <h3>{{ activity.title }}</h3><p>{{ activity.summary }}</p>
+      <h3>{{ activity.title }}</h3>
+      <!-- <p>{{ activity.summary }}</p> -->
       <span class="card-link">Read the story <span>↗</span></span>
     </div>
   </NuxtLink>
