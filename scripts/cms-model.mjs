@@ -94,6 +94,7 @@ export const collections = [
       text('school', 'School'),
       text('interest', 'Area of Interest'),
       file('hero', 'Homepage Photo'),
+      file('nature_photo', 'Nature Photo'),
       text('email', 'Public Contact Email', {
         note: 'Optional. This address will be displayed publicly on the website.',
       }),
@@ -255,6 +256,7 @@ export const relations = [
   },
   ...[
     ['profile', 'hero'],
+    ['profile', 'nature_photo'],
     ['activities', 'cover'],
     ['activity_media', 'file'],
   ].map(([collection, field]) => ({
@@ -309,6 +311,7 @@ export const publicPermissions = [
       'school',
       'interest',
       'hero',
+      'nature_photo',
       'email',
     ],
     permissions: {},

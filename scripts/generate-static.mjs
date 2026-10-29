@@ -129,7 +129,11 @@ async function readData(path, query) {
   const url = new URL(path, `${directusUrl}/`)
   for (const [key, value] of Object.entries(query)) url.searchParams.set(key, value)
   const response = await fetch(url, { signal: AbortSignal.timeout(20000) })
-  if (!response.ok) throw new Error(`Directus request failed: ${url.pathname} (HTTP ${response.status}). Check the public API and permissions.`)
+  if (!response.ok) {
+    const payload = await response.json().catch(() => null)
+    const reason = payload?.errors?.map(error => error.message).filter(Boolean).join('; ')
+    throw new Error(`Directus request failed: ${url.pathname} (HTTP ${response.status}). ${reason || 'Check the public API and permissions.'}`)
+  }
   const payload = await response.json()
   return payload.data
 }
