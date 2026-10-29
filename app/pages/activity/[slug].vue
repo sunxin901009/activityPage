@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { assetUrl, formatDate } from '#shared/format'
+import { assetUrl } from '#shared/format'
 const route = useRoute()
 const { data: activity, error } = await useActivity(() => String(route.params.slug))
 if (error.value) throw createError({ statusCode: error.value.statusCode || 503, statusMessage: error.value.statusCode === 404 ? 'This activity does not exist or has not been published.' : 'This story is temporarily unavailable. Please try again later.' })
@@ -20,7 +20,10 @@ useSeoMeta({ title: () => `${activity.value?.title} · ${portfolio.value?.profil
 <template>
   <div v-if="activity" class="detail-page">
     <div class="shell"><div class="breadcrumb"><NuxtLink to="/">Home</NuxtLink><span>/</span><NuxtLink :to="`/activities/${activity.category.slug}`">{{ activity.category.title }}</NuxtLink><span>/</span><span>Activity Stories</span></div></div>
-    <header class="article-heading"><NuxtLink :to="`/activities/${activity.category.slug}`" :class="['article-category', `tone-${activity.category.color}`]">{{ activity.category.title }}</NuxtLink><h1>{{ activity.title }}</h1><p>{{ activity.summary }}</p><div class="article-meta"><time :datetime="activity.date">{{ formatDate(activity.date) }}</time><!-- <span>{{ activity.location }}</span><span>{{ activity.role }}</span> --></div></header>
+    <header class="article-heading">
+      <NuxtLink :to="`/activities/${activity.category.slug}`" :class="['article-category', `tone-${activity.category.color}`]">{{ activity.category.title }}</NuxtLink><h1>{{ activity.title }}</h1><p>{{ activity.summary }}</p>
+      <!-- <div class="article-meta"><time :datetime="activity.date">{{ formatDate(activity.date) }}</time><span>{{ activity.location }}</span><span>{{ activity.role }}</span></div> -->
+    </header>
     <figure v-if="activity.cover" class="article-cover shell"><img :src="assetUrl(activity.cover, 1600)!" :alt="activity.cover_alt || activity.title" width="1600" height="950" fetchpriority="high"><figcaption>{{ activity.cover_alt }}</figcaption></figure>
     <div class="article-layout shell">
       <aside class="article-sidebar"><span class="eyebrow">IN THIS STORY</span><a href="#story">Activity Stories</a><a v-if="gallery.length" href="#gallery">{{ galleryTitle }}</a><a v-if="activity.outcome" href="#outcome">Outcomes and Takeaways</a><a v-if="activity.reflection" href="#reflection">Reflections</a><a v-if="attachments.length" href="#attachments">Related Materials</a><button @click="copyLink">{{ copyState }} ↗</button><span class="sr-only" role="status">{{ copyState }}</span></aside>

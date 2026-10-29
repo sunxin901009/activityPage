@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Activity } from '#shared/types'
-import { assetUrl, formatDate } from '#shared/format'
+import { assetUrl } from '#shared/format'
 defineProps<{ activity: Activity; index?: number }>()
 </script>
 
@@ -13,7 +13,10 @@ defineProps<{ activity: Activity; index?: number }>()
       <span class="card-open"><ArrowIcon /></span>
     </div>
     <div class="card-content">
-      <div class="card-meta"><time :datetime="activity.date">{{ formatDate(activity.date) }}</time><span>{{ activity.role }}</span></div>
+      <div class="card-meta">
+        <!-- <time :datetime="activity.date">{{ formatDate(activity.date) }}</time> -->
+        <span>{{ activity.role }}</span>
+      </div>
       <h3>{{ activity.title }}</h3><p>{{ activity.summary }}</p>
       <span class="card-link">Read the story <span>↗</span></span>
     </div>
