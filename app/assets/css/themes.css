@@ -285,3 +285,77 @@ html[data-theme="sunset-grove"] .theme-option-check { color: #a8541f; }
   html[data-theme="ocean-spray"] .interest-note { position: static; order: 6; width: 232px; margin-top: 6px; }
   html[data-theme="sunset-grove"] .hero::before { width: 300px; height: 300px; right: -30%; top: -60px; }
 }
+
+@media (max-width: 600px) {
+  html[data-theme] .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 22px;
+    width: calc(100% - 40px);
+    max-width: none;
+    min-height: 0;
+    margin-inline: auto;
+    padding: 30px 20px 38px;
+    overflow-x: clip;
+  }
+  html[data-theme] .hero-copy,
+  html[data-theme] .hero-art {
+    grid-column: 1;
+    width: 100%;
+    min-width: 0;
+  }
+  html[data-theme] .hero-copy { max-width: 100%; }
+  html[data-theme] .hero h1 {
+    max-width: 100%;
+    font-size: clamp(46px, 13vw, 56px);
+    line-height: 1.03;
+    letter-spacing: -2px;
+    overflow-wrap: normal;
+  }
+  html[data-theme] .hero h1 > span:first-child { white-space: normal; }
+  html[data-theme] .hero-tagline {
+    max-width: 100%;
+    font-size: clamp(18px, 5.6vw, 22px);
+    line-height: 1.4;
+    margin-bottom: 18px;
+  }
+  html[data-theme] .hero-intro {
+    width: 100%;
+    max-width: 52ch;
+    margin-bottom: 18px;
+    line-height: 1.75;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+  html[data-theme] .hero-intro * {
+    display: inline !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    letter-spacing: normal !important;
+  }
+  html[data-theme] .hero-footnote {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-top: 18px;
+  }
+  html[data-theme] .hero-art {
+    max-width: 390px;
+    padding: 10px 16px 10px 22px;
+    margin: 0 auto;
+  }
+  html[data-theme] .hero-photo { height: clamp(280px, 82vw, 330px); }
+  .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row; gap: 12px; }
+  .category-tile { min-width: 0; padding: 16px 13px; }
+  .category-tile h3 {
+    max-width: 100%;
+    font-size: clamp(16px, 4.6vw, 19px);
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+  .category-tile p { line-height: 1.5; overflow-wrap: anywhere; }
+  .category-tile:last-child h3 { max-width: 60%; }
+}
